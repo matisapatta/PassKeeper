@@ -17,6 +17,7 @@ import database.DBManager;
 
 public class MainActivity extends AppCompatActivity implements Observer {
 
+    // Variables
     static final String editEntry = "EDIT";
     static final String newEntry = "NEW";
     private Button addBtn;
