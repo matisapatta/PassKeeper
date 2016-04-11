@@ -25,13 +25,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
     private ListView pwdList;
     private List<DataStruct> list;
     private DBManager db;
-    private DataStruct arrayPrueba[] =
-            new DataStruct[]{
-                    new DataStruct(1,"Facebook","mati.sapatta@gmail.com","1","1"),
-                    new DataStruct(2,"Gmail","mati.sapatta@gmail.com","1","1")
-            };
     private ListDataAdapter adapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
