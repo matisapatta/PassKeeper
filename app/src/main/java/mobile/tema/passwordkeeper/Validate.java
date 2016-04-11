@@ -36,7 +36,7 @@ public class Validate {
         }
     }
 
-    // Función para guardar los datos.
+    // Función para validar los datos ingresados.
     public boolean validateData(EditText acc, EditText usr, EditText pwd, EditText cmt, Context context) {
         Validate validate = new Validate();
         if (validate.ValidateEntry(acc)) {

@@ -41,7 +41,7 @@ public class DataBase extends SQLiteOpenHelper{
             registry.clear();
         }
         //Carga con datos dummy de un ejemplo
-        for (int i=0; i<1; i++) {
+        /*for (int i=0; i<1; i++) {
             registry.put(DBLayout.DBConstants.PASS_TABLE_ACC, DBLayout.DBConstants.ACCOUNTS_NAME[1]);
             registry.put(DBLayout.DBConstants.PASS_TABLE_USER,"UsuarioPrueba1");
             registry.put(DBLayout.DBConstants.PASS_TABLE_PASS, "PasswordPrueba1");
@@ -49,6 +49,6 @@ public class DataBase extends SQLiteOpenHelper{
 
             db.insert(DBLayout.DBConstants.PASS_TABLE, null, registry);
             registry.clear();
-        }
+        }*/
     }
 }
