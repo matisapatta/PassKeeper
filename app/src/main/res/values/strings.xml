@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">PasswordKeeper</string>
+    <string name="enterPwd">Ingrese su contraseña maestra:</string>
+    <string name="pwd">Contraseña</string>
+    <string name="login">Entrar</string>
+    <string name="usrInput">Ingrese nombre de usuario:</string>
+    <string name="pwdInput">Ingrese la contraseña:</string>
+    <string name="userHint">Usuario</string>
+    <string name="accInput">Cuenta:</string>
+    <string name="accHint">Cuenta</string>
+    <string name="save">Guardar</string>
+    <string name="reset">Restaurar</string>
+    <string name="add">Agregar nuevo</string>
+    <string name="cmtHint">Comentarios</string>
+    <string name="cmtInput">Comentarios:</string>
+    <string name="resetBtn">Eliminar todo</string>
+    <string name="first">Para comenzar, ingrese una contraseña maestra:</string>
+    <string name="delete">Eliminar</string>
+    <string name="edit">Editar</string>
+</resources>
