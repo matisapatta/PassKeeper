@@ -127,5 +127,11 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
         deleteBtn.setOnClickListener(this);
         editBtn.setOnClickListener(this);
     }
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        super.onBackPressed();
+    }
 
 }
