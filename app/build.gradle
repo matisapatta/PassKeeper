@@ -20,8 +20,12 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.google.android.gms:play-services-ads:8.4.0'
+    compile 'net.zetetic:android-database-sqlcipher:3.4.0'
+    compile files('src/main/jniLibs/commons-codec.jar')
+    compile files('src/main/jniLibs/guava-r09.jar')
+    compile files('src/main/jniLibs/sqlcipher.jar')
 }
