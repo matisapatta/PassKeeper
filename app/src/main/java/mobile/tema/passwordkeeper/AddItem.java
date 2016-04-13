@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import database.DBManager;
 
 public class AddItem extends AppCompatActivity  implements View.OnClickListener{
@@ -23,7 +26,8 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
     private EditText cmt;
     private DBManager db;
     private String mode;
-
+    private String encPwd;
+    private Encryption e;
 
     @Override
     public void onClick(View v){
@@ -32,10 +36,14 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
                 Validate val= new Validate();
                 if(val.validateData(acc, usr, pwd, cmt, this)){
                     // podría enviarse el texto nada más
+
+                    if(pwd.getText()!=null)
+                        encPwd = e.encryptOrNull(pwd.getText().toString());
                     if(mode.equals("NEW"))
-                    db.newEntry(acc.getText().toString(),usr.getText().toString(),pwd.getText().toString(),cmt.getText().toString());
+                        db.newEntry(acc.getText().toString(),usr.getText().toString(),encPwd,cmt.getText().toString());
+                        //db.newEntry(acc.getText().toString(),usr.getText().toString(),pwd.getText().toString(),cmt.getText().toString());
                     else
-                    db.updateEntry(data.getId(),acc.getText().toString(),usr.getText().toString(),pwd.getText().toString(),cmt.getText().toString());
+                        db.updateEntry(data.getId(),acc.getText().toString(),usr.getText().toString(),encPwd,cmt.getText().toString());
                     Toast.makeText(getApplicationContext(), "Guardado!", Toast.LENGTH_LONG).show();
                     db.close();
                     Intent intent = new Intent(this, MainActivity.class);
@@ -79,8 +87,17 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
         mode = b.getString("MODE");
         data = (DataStruct)i.getParcelableExtra("information");
 
+        // AddMob
+        AdView mAdView = (AdView) findViewById(R.id.adViewItem);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         // Inicializo BBDD
         db = new DBManager(this);
+
+        // Inicializo el método de encrypt
+        String key = db.getMasterPwd();
+        e = Encryption.getDefault(key,"saltkey",new byte[16]);
 
         // Relaciono los botones del layout con el código Java
         saveBtn = (Button)findViewById(R.id.saveBtn);
@@ -96,7 +113,7 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
             if(data!=null){
                 acc.setText(data.getAccount());
                 usr.setText(data.getUsername());
-                pwd.setText(data.getPassword());
+                pwd.setText(e.decryptOrNull(data.getPassword()));
                 if(data.getComment().length()>0)
                     cmt.setText(data.getComment());
                 else
@@ -107,6 +124,7 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
                 resetBtn.setVisibility(View.INVISIBLE);
                 deleteBtn.setVisibility(View.VISIBLE);
                 editBtn.setVisibility(View.VISIBLE);
+
                 //Cambio editabilidad de los campos
                 acc.setEnabled(false);
                 pwd.setEnabled(false);

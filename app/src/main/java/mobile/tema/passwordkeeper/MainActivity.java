@@ -8,9 +8,17 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 
 import database.DBManager;
 
@@ -32,9 +40,16 @@ public class MainActivity extends AppCompatActivity implements Observer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent i = getIntent();
+
+        // AddMob
+        AdView mAdView = (AdView) findViewById(R.id.adViewMain);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         // Inicializo Base de datos
         db = new DBManager(this);
         db.addObserver(this);
+
 
         // Inicializo el resto de los componentes
         addBtn=(Button)findViewById(R.id.addBtn);
@@ -102,5 +117,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
         startActivity(intent);
         finish();
     }
+
 
 }

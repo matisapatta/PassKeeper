@@ -11,6 +11,13 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Random;
+
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+
 import database.DBManager;
 
 public class EntryActivity extends AppCompatActivity {
@@ -21,6 +28,7 @@ public class EntryActivity extends AppCompatActivity {
     private TextView mainT;
     private DBManager db;
     private String aux;
+    private String k;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +36,25 @@ public class EntryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_entry);
 
         // AddMob
-        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdView mAdView = (AdView) findViewById(R.id.adViewEntry);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
+        // key
+        try{
+            k = generateKey().toString();
+        } catch (NoSuchAlgorithmException e){
+
+        }
+        char[] chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHYJKLMNOPQRSTUVWXYZ!$%&/()?*+".toCharArray();
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < 20; i++) {
+            char c = chars[random.nextInt(chars.length)];
+            sb.append(c);
+        }
+        String output = sb.toString();
+        System.out.println(output);
 
         db = new DBManager(this);
         //db.update();
@@ -70,5 +94,17 @@ public class EntryActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public static SecretKey generateKey() throws NoSuchAlgorithmException {
+        // Generate a 256-bit key
+        final int outputKeyLength = 256;
+
+        SecureRandom secureRandom = new SecureRandom();
+        // Do *not* seed secureRandom! Automatically seeded from system entropy.
+        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+        keyGenerator.init(outputKeyLength, secureRandom);
+        SecretKey key = keyGenerator.generateKey();
+        return key;
     }
 }

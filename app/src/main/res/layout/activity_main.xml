@@ -10,25 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="mobile.tema.passwordkeeper.MainActivity">
 
-    <Button
-        android:id="@+id/addBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/add"
-        android:layout_marginBottom="56dp"
-        android:layout_above="@+id/resetBtn"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        />
-    <Button
-        android:id="@+id/resetBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/resetBtn"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        />
-
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,4 +18,34 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         />
+
+    <Button
+        android:id="@+id/addBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add"
+        android:layout_above="@+id/resetBtn"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@id/listView"
+        />
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adViewMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id">
+    </com.google.android.gms.ads.AdView>
+    <Button
+        android:id="@+id/resetBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/resetBtn"
+        android:layout_alignEnd="@id/listView"
+        android:layout_alignParentStart="true"
+        android:layout_above="@id/adViewMain"
+        />
+
+
 </RelativeLayout>
