@@ -96,8 +96,8 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
         db = new DBManager(this);
 
         // Inicializo el método de encrypt
-        String key = db.getMasterPwd();
-        e = Encryption.getDefault(key,"saltkey",new byte[16]);
+        String key = db.getMasterPwd(this);
+        e = Encryption.getDefault(key,"m0b!le1*",new byte[16]);
 
         // Relaciono los botones del layout con el código Java
         saveBtn = (Button)findViewById(R.id.saveBtn);

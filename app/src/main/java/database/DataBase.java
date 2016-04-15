@@ -2,8 +2,14 @@ package database;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+//import android.database.sqlite.SQLiteDatabase;
+//import android.database.sqlite.SQLiteOpenHelper;
+
+import net.sqlcipher.Cursor;
+import net.sqlcipher.DatabaseUtils;
+import net.sqlcipher.SQLException;
+import net.sqlcipher.database.SQLiteDatabase;
+import net.sqlcipher.database.SQLiteOpenHelper;
 
 /**
  * Created by mati on 4/8/16.
@@ -14,6 +20,7 @@ public class DataBase extends SQLiteOpenHelper{
     public DataBase(Context context) {
         super(context, DBLayout.DBConstants.DB, null, 5);
     }
+
     @Override
     public void onCreate(SQLiteDatabase db){
         createBDBase(db);

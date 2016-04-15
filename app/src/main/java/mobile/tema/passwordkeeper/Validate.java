@@ -4,6 +4,8 @@ import android.content.Context;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Random;
+
 import database.DBManager;
 
 /**
@@ -55,5 +57,17 @@ public class Validate {
             Toast.makeText(context, "La cuenta no puede ser vacía!", Toast.LENGTH_LONG).show();
             return false;
         }
+    }
+
+    public String randomString() {
+        char[] chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHYJKLMNOPQRSTUVWXYZ!$%&/()?*+".toCharArray();
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < 20; i++) {
+            char c = chars[random.nextInt(chars.length)];
+            sb.append(c);
+        }
+        String output = sb.toString();
+        return output;
     }
 }

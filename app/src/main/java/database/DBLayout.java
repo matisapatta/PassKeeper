@@ -49,5 +49,8 @@ public class DBLayout {
         static final String CREATE_MASTER_PASS_TABLE = "CREATE TABLE IF NOT EXISTS " + MASTER_PASS_TABLE
                 + " (" + MASTER_PASS_ID + "  INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + MASTER_PASS_PASS + " VARCHAR(40)" + ")";
+        static final String FILENAME = "keyfile";
+
+
     }
 }

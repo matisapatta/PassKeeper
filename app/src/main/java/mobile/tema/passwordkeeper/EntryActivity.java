@@ -10,14 +10,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Random;
-
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-
 import database.DBManager;
 
 public class EntryActivity extends AppCompatActivity {
@@ -46,6 +43,7 @@ public class EntryActivity extends AppCompatActivity {
         } catch (NoSuchAlgorithmException e){
 
         }
+
         char[] chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHYJKLMNOPQRSTUVWXYZ!$%&/()?*+".toCharArray();
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
@@ -63,10 +61,10 @@ public class EntryActivity extends AppCompatActivity {
         loginBtn = (Button)findViewById(R.id.loginBtn);
         fail = (TextView)findViewById(R.id.fail);
         mainT = (TextView)findViewById(R.id.enterPwd);
-        if(db.getMasterPwd()==null) {
+        if(db.getMasterPwd(this)==null) {
             mainT.setText(getResources().getString(R.string.first));
         } else {
-            aux = new String(db.getMasterPwd());
+            aux = new String(db.getMasterPwd(this));
         }
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
