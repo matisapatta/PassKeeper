@@ -28,6 +28,7 @@ public class DBLayout {
                 "Otros"
         };
 
+        static final String PASS_BACKUP = "Backup";
         static final String PASS_TABLE = "Lista";
         static final String PASS_TABLE_ID = "_id";
         static final String PASS_TABLE_ACC = "Cuenta";
@@ -41,6 +42,24 @@ public class DBLayout {
                 + PASS_TABLE_USER + "  VARCHAR(40), "
                 + PASS_TABLE_PASS + "  VARCHAR(40), "
                 + PASS_TABLE_COMMENTS + " VARCHAR(100)" + ")";
+        static final String CREATE_BACKUP_TABLE = "CREATE TEMPORARY TABLE " + PASS_BACKUP
+                + " (" + PASS_TABLE_ID + "  INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + PASS_TABLE_ACC + " VARCHAR(40), "
+                + PASS_TABLE_USER + "  VARCHAR(40), "
+                + PASS_TABLE_PASS + "  VARCHAR(40), "
+                + PASS_TABLE_COMMENTS + " VARCHAR(100)" + ")";
+        static final String INSERT_FROM_TABLE = "INSERT INTO " + PASS_BACKUP + " SELECT "
+                + PASS_TABLE_ID + ", "
+                + PASS_TABLE_ACC + ", "
+                + PASS_TABLE_USER + ", "
+                + PASS_TABLE_PASS + ", "
+                + PASS_TABLE_COMMENTS + " FROM " + PASS_TABLE;
+        static final String INSERT_FROM_BACKUP = "INSERT INTO " + PASS_TABLE + " SELECT "
+                + PASS_TABLE_ID + ", "
+                + PASS_TABLE_ACC + ", "
+                + PASS_TABLE_USER + ", "
+                + PASS_TABLE_PASS + ", "
+                + PASS_TABLE_COMMENTS + " FROM " + PASS_BACKUP;
 
         static final String MASTER_PASS_TABLE = "MasterPass";
         static final String MASTER_PASS_ID = "_id";
@@ -50,6 +69,8 @@ public class DBLayout {
                 + " (" + MASTER_PASS_ID + "  INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + MASTER_PASS_PASS + " VARCHAR(40)" + ")";
         static final String FILENAME = "keyfile";
+
+        static final int CURRENT_VERSION = 2;
 
 
     }

@@ -65,7 +65,8 @@ public class DBManager extends Observable{
     // Sólo utilizado para hacer update de la base de datos por algún cambio
     public void update(){
         SQLiteDatabase db = b.getWritableDatabase(key);
-        b.onUpgrade(db, 0, 0);
+        b.onUpgrade(db, DBLayout.DBConstants.CURRENT_VERSION, DBLayout.DBConstants.CURRENT_VERSION);
+
     }
 
     // Buscar las cuentas predefinidas en la tabla de Accounts
@@ -97,7 +98,6 @@ public class DBManager extends Observable{
             name = cursor.getString(0);
         }
         cursor.close();
-
         return name;
     }
 
@@ -114,6 +114,7 @@ public class DBManager extends Observable{
                 list.add(obj);
             } while (cursor.moveToNext());
         }
+        cursor.close();
         return list;
     }
 
@@ -130,6 +131,7 @@ public class DBManager extends Observable{
             entry = new DataStruct(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3),
                     cursor.getString(4));
         }
+        cursor.close();
         return entry;
     }
 
@@ -197,6 +199,7 @@ public class DBManager extends Observable{
         if (cursor.moveToFirst()) {
             entry = new String(cursor.getString(1));
         }
+        cursor.close();
         return entry;
     }
 

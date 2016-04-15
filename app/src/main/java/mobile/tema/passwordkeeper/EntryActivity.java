@@ -55,6 +55,7 @@ public class EntryActivity extends AppCompatActivity {
         System.out.println(output);
 
         db = new DBManager(this);
+
         //db.update();
         //db.deleteMasterPwd();
         pwdField = (EditText)findViewById(R.id.pwdField);
