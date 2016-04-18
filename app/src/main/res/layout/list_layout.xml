@@ -9,12 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        />
 
     <TextView android:id="@+id/subtitleLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="normal"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        />
 
 </LinearLayout>
