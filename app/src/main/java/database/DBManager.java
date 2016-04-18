@@ -30,7 +30,7 @@ public class DBManager extends Observable{
 
     public DBManager(Context context){
         SQLiteDatabase.loadLibs(context);
-        b = new DataBase(context);
+
         file = new File(context.getFilesDir(), DBLayout.DBConstants.FILENAME);
         if(file.exists()){
             try {
@@ -52,14 +52,15 @@ public class DBManager extends Observable{
             try {
                 Validate v = new Validate();
                 FileOutputStream outputStream = context.openFileOutput(DBLayout.DBConstants.FILENAME, Context.MODE_PRIVATE);
-                String aKey = v.randomString();
-                outputStream.write(aKey.getBytes());
+                key = v.randomString();
+                outputStream.write(key.getBytes());
                 outputStream.close();
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+        b = new DataBase(context);
     }
 
     // Sólo utilizado para hacer update de la base de datos por algún cambio

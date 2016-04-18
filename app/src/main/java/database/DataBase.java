@@ -41,9 +41,9 @@ public class DataBase extends SQLiteOpenHelper{
         db.execSQL(DBLayout.DBConstants.CREATE_ACCOUNTS_TABLE);
         db.execSQL(DBLayout.DBConstants.CREATE_PASS_TABLE);
 
-        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM sqlite_master WHERE type = ? AND name = ?", new String[] {"table", DBLayout.DBConstants.PASS_BACKUP});
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM sqlite_master WHERE type = ? AND name = ?",
+                new String[] {"table", DBLayout.DBConstants.PASS_BACKUP});
         if (!cursor.moveToFirst()) {
-
         }
         int count = cursor.getInt(0);
         cursor.close();
