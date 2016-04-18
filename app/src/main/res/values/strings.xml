@@ -14,8 +14,18 @@
     <string name="cmtHint">Comentarios</string>
     <string name="cmtInput">Comentarios:</string>
     <string name="resetBtn">Eliminar todo</string>
-    <string name="first">Para comenzar, ingrese una contraseña maestra:</string>
+    <string name="entryMasterPwd">Para comenzar, ingrese una contraseña maestra:</string>
     <string name="delete">Eliminar</string>
     <string name="edit">Editar</string>
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="itemSaved">Guardado!</string>
+    <string name="screenClear">Reestablecido!</string>
+    <string name="emptyAccount">La cuenta no puede ser vacía!</string>
+    <string name="emptyUser">El usuario no puede ser vacío!</string>
+    <string name="emptyPwd">La contraseña no puede ser vacía!</string>
+    <string name="savedPwd">Contraseña guardada!</string>
+    <string name="wrongPwd">Contraseña Incorrecta</string>
+    <string name="emptyMasterPwd">Ingrese una contraseña</string>
+    <string name="deletedEntry">Eliminado!</string>
+    
 </resources>

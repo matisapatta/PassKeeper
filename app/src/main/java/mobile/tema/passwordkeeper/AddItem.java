@@ -44,7 +44,7 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
                         //db.newEntry(acc.getText().toString(),usr.getText().toString(),pwd.getText().toString(),cmt.getText().toString());
                     else
                         db.updateEntry(data.getId(),acc.getText().toString(),usr.getText().toString(),encPwd,cmt.getText().toString());
-                    Toast.makeText(getApplicationContext(), "Guardado!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), this.getResources().getString(R.string.itemSaved), Toast.LENGTH_LONG).show();
                     db.close();
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
@@ -57,10 +57,11 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
                 acc.setText("");
                 usr.setText("");
                 cmt.setText("");
-                Toast.makeText(getApplicationContext(),"Reestablecido!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),this.getResources().getString(R.string.screenClear),Toast.LENGTH_SHORT).show();
                 break;
             case R.id.deleteBtn:
                 db.deleteEntry(data.getId());
+                Toast.makeText(getApplicationContext(), this.getResources().getString(R.string.deletedEntry), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 finish();

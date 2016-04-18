@@ -63,7 +63,7 @@ public class EntryActivity extends AppCompatActivity {
         fail = (TextView)findViewById(R.id.fail);
         mainT = (TextView)findViewById(R.id.enterPwd);
         if(db.getMasterPwd(this)==null) {
-            mainT.setText(getResources().getString(R.string.first));
+            mainT.setText(getResources().getString(R.string.entryMasterPwd));
         } else {
             aux = new String(db.getMasterPwd(this));
         }
@@ -75,7 +75,7 @@ public class EntryActivity extends AppCompatActivity {
                     if (aux == null) {
                         // seteo la master password
                         db.setMasterPwd(pwdField.getText().toString());
-                        Toast.makeText(getApplicationContext(),"Contraseña guardada!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),getApplicationContext().getResources().getString(R.string.savedPwd),Toast.LENGTH_SHORT).show();
                         startActivity(intent);
                         finish();
                     } else {
@@ -84,12 +84,12 @@ public class EntryActivity extends AppCompatActivity {
                             startActivity(intent);
                             finish();
                         } else {
-                            fail.setText("Contraseña Incorrecta");
+                            fail.setText(getApplicationContext().getResources().getString(R.string.wrongPwd));
                             pwdField.setText("");
                         }
                     }
                 } else {
-                    fail.setText("Ingrese una contraseña");
+                    fail.setText(getApplicationContext().getResources().getString(R.string.emptyMasterPwd));
                 }
             }
         });

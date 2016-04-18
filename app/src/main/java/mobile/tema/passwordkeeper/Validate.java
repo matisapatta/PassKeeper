@@ -46,15 +46,15 @@ public class Validate {
                 if (validate.ValidateEntry(pwd)) {
                     return true;
                 } else {
-                    Toast.makeText(context, "La contraseña no puede ser vacía!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, context.getResources().getString(R.string.emptyPwd), Toast.LENGTH_LONG).show();
                     return false;
                 }
             } else {
-                Toast.makeText(context, "El usuario no puede ser vacío!", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, context.getResources().getString(R.string.emptyUser), Toast.LENGTH_LONG).show();
                 return false;
             }
         } else {
-            Toast.makeText(context, "La cuenta no puede ser vacía!", Toast.LENGTH_LONG).show();
+            Toast.makeText(context,context.getResources().getString(R.string.emptyAccount), Toast.LENGTH_LONG).show();
             return false;
         }
     }
