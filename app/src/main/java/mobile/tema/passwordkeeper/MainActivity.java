@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
                 // Busco la estructura
                 DataStruct data = db.getEntrybyID(selected);
                 newActivity(data,editEntry);
-                finish();
+                //finish();
             }
         });
     }
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
         b.putParcelable("information",data);
         intent.putExtras(b);
         startActivity(intent);
-        finish();
+        this.finish();
     }
 
 

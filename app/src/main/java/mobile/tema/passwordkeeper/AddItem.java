@@ -1,6 +1,8 @@
 package mobile.tema.passwordkeeper;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,28 +30,17 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
     private String mode;
     private String encPwd;
     private Encryption e;
+    private ProgressDialog progressDialog;
 
     @Override
     public void onClick(View v){
         switch(v.getId()){
             case R.id.saveBtn:
-                Validate val= new Validate();
-                if(val.validateData(acc, usr, pwd, cmt, this)){
-                    // podría enviarse el texto nada más
-
-                    if(pwd.getText()!=null)
-                        encPwd = e.encryptOrNull(pwd.getText().toString());
-                    if(mode.equals("NEW"))
-                        db.newEntry(acc.getText().toString(),usr.getText().toString(),encPwd,cmt.getText().toString());
-                        //db.newEntry(acc.getText().toString(),usr.getText().toString(),pwd.getText().toString(),cmt.getText().toString());
-                    else
-                        db.updateEntry(data.getId(),acc.getText().toString(),usr.getText().toString(),encPwd,cmt.getText().toString());
-                    Toast.makeText(getApplicationContext(), this.getResources().getString(R.string.itemSaved), Toast.LENGTH_LONG).show();
-                    db.close();
-                    Intent intent = new Intent(this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
+                data.setAccount(acc.getText().toString());
+                data.setUsername(usr.getText().toString());
+                data.setPass(encPwd);
+                data.setComment(cmt.getText().toString());
+                new AsyncDB().execute();
 
                 break;
             case R.id.resetBtn:
@@ -62,8 +53,8 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
             case R.id.deleteBtn:
                 db.deleteEntry(data.getId());
                 Toast.makeText(getApplicationContext(), this.getResources().getString(R.string.deletedEntry), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+                Intent i = new Intent(this, MainActivity.class);
+                startActivity(i);
                 finish();
                 break;
             case R.id.editBtn:
@@ -110,6 +101,9 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
         usr = (EditText)findViewById(R.id.usrInput);
         cmt = (EditText)findViewById(R.id.cmtInput);
 
+        if(pwd.getText()!=null)
+            encPwd = e.encryptOrNull(pwd.getText().toString());
+
         if(mode.equals("EDIT")){
             if(data!=null){
                 acc.setText(data.getAccount());
@@ -151,6 +145,49 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         super.onBackPressed();
+    }
+    private class AsyncDB extends AsyncTask<Void, Integer, Void>{
+
+        //Before running code in separate thread
+        @Override
+        protected void onPreExecute()
+        {
+            progressDialog = new ProgressDialog(AddItem.this);
+            progressDialog.setMessage("Guardando");
+            progressDialog.show();
+            //progressDialog = ProgressDialog.show(AddItem.this,"Loading...",
+              //     "Loading application View, please wait...", false, false);
+        }
+
+        @Override
+        protected Void doInBackground(Void... params){
+            synchronized (getApplicationContext()) {
+                Validate val = new Validate();
+                if (val.validateData(acc, usr, pwd, cmt, getApplicationContext())) {
+                    if (mode.equals("NEW")) {
+                        db.newEntry(data.getAccount(), data.getUsername(), encPwd, data.getComment());
+                    } else {
+                        db.updateEntry(data.getId(), data.getAccount(), data.getUsername(), encPwd, data.getComment());
+                    }
+                }
+            }
+            return null;
+        }
+
+        //after executing the code in the thread
+        @Override
+        protected void onPostExecute(Void result)
+        {
+            //close the progress dialog
+            Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.itemSaved), Toast.LENGTH_LONG).show();
+            db.close();
+            //setContentView(R.layout.activity_main);
+            Intent intent = new Intent(AddItem.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+            progressDialog.dismiss();
+
+        }
     }
 
 }

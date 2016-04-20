@@ -84,6 +84,7 @@ public class DBManager extends Observable{
             } while (cursor.moveToNext());
         }
         cursor.close();
+        b.close();
         return acc;
     }
 
@@ -99,6 +100,7 @@ public class DBManager extends Observable{
             name = cursor.getString(0);
         }
         cursor.close();
+        b.close();
         return name;
     }
 
@@ -116,6 +118,7 @@ public class DBManager extends Observable{
             } while (cursor.moveToNext());
         }
         cursor.close();
+        b.close();
         return list;
     }
 
@@ -133,6 +136,7 @@ public class DBManager extends Observable{
                     cursor.getString(4));
         }
         cursor.close();
+        b.close();
         return entry;
     }
 
@@ -201,6 +205,7 @@ public class DBManager extends Observable{
             entry = new String(cursor.getString(1));
         }
         cursor.close();
+        b.close();
         return entry;
     }
 
