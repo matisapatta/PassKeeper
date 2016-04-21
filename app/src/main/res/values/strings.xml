@@ -27,5 +27,7 @@
     <string name="wrongPwd">Incorrect password</string>
     <string name="emptyMasterPwd">Enter a password</string>
     <string name="deletedEntry">Deleted!</string>
+    <string name="saving">Saving...</string>
+    <string name="deleting">Deleting...</string>
     
 </resources>

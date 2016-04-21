@@ -28,8 +28,6 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
     private EditText cmt;
     private DBManager db;
     private String mode;
-    private String encPwd;
-    private Encryption e;
     private ProgressDialog progressDialog;
 
     @Override
@@ -38,7 +36,7 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
             case R.id.saveBtn:
                 data.setAccount(acc.getText().toString());
                 data.setUsername(usr.getText().toString());
-                data.setPass(encPwd);
+                data.setPass(pwd.getText().toString());
                 data.setComment(cmt.getText().toString());
                 new AsyncDB().execute();
 
@@ -51,11 +49,9 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
                 Toast.makeText(getApplicationContext(),this.getResources().getString(R.string.screenClear),Toast.LENGTH_SHORT).show();
                 break;
             case R.id.deleteBtn:
-                db.deleteEntry(data.getId());
-                Toast.makeText(getApplicationContext(), this.getResources().getString(R.string.deletedEntry), Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(this, MainActivity.class);
-                startActivity(i);
-                finish();
+                new AsyncDelete().execute();
+
+
                 break;
             case R.id.editBtn:
                 acc.setEnabled(true);
@@ -79,17 +75,20 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
         mode = b.getString("MODE");
         data = (DataStruct)i.getParcelableExtra("information");
 
+        // Inicializo BBDD
+        db = new DBManager(this);
+
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+
         // AddMob
         AdView mAdView = (AdView) findViewById(R.id.adViewItem);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        // Inicializo BBDD
-        db = new DBManager(this);
-
-        // Inicializo el método de encrypt
-        String key = db.getMasterPwd(this);
-        e = Encryption.getDefault(key,"m0b!le1*",new byte[16]);
 
         // Relaciono los botones del layout con el código Java
         saveBtn = (Button)findViewById(R.id.saveBtn);
@@ -101,14 +100,12 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
         usr = (EditText)findViewById(R.id.usrInput);
         cmt = (EditText)findViewById(R.id.cmtInput);
 
-        if(pwd.getText()!=null)
-            encPwd = e.encryptOrNull(pwd.getText().toString());
 
         if(mode.equals("EDIT")){
             if(data!=null){
                 acc.setText(data.getAccount());
                 usr.setText(data.getUsername());
-                pwd.setText(e.decryptOrNull(data.getPassword()));
+                pwd.setText(data.getPassword());
                 if(data.getComment().length()>0)
                     cmt.setText(data.getComment());
                 else
@@ -134,11 +131,13 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
             editBtn.setVisibility(View.INVISIBLE);
             deleteBtn.setVisibility(View.INVISIBLE);
         }
+
         // Asigno los eventos onClick
         saveBtn.setOnClickListener(this);
         resetBtn.setOnClickListener(this);
         deleteBtn.setOnClickListener(this);
         editBtn.setOnClickListener(this);
+
     }
     @Override
     public void onBackPressed(){
@@ -153,7 +152,7 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
         protected void onPreExecute()
         {
             progressDialog = new ProgressDialog(AddItem.this);
-            progressDialog.setMessage("Guardando");
+            progressDialog.setMessage(getApplicationContext().getResources().getString(R.string.saving));
             progressDialog.show();
             //progressDialog = ProgressDialog.show(AddItem.this,"Loading...",
               //     "Loading application View, please wait...", false, false);
@@ -165,9 +164,9 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
                 Validate val = new Validate();
                 if (val.validateData(acc, usr, pwd, cmt, getApplicationContext())) {
                     if (mode.equals("NEW")) {
-                        db.newEntry(data.getAccount(), data.getUsername(), encPwd, data.getComment());
+                        db.newEntry(data.getAccount(), data.getUsername(), data.getPassword(), data.getComment());
                     } else {
-                        db.updateEntry(data.getId(), data.getAccount(), data.getUsername(), encPwd, data.getComment());
+                        db.updateEntry(data.getId(), data.getAccount(), data.getUsername(), data.getPassword(), data.getComment());
                     }
                 }
             }
@@ -190,4 +189,42 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
         }
     }
 
+    private class AsyncDelete extends AsyncTask<Void, Integer, Void>{
+
+        //Before running code in separate thread
+        @Override
+        protected void onPreExecute()
+        {
+            progressDialog = new ProgressDialog(AddItem.this);
+            progressDialog.setMessage(getApplicationContext().getResources().getString(R.string.deleting));
+            progressDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params){
+            synchronized (getApplicationContext()) {
+                db.deleteEntry(data.getId());
+            }
+            return null;
+        }
+
+        //after executing the code in the thread
+        @Override
+        protected void onPostExecute(Void result)
+        {
+            //close the progress dialog
+            Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.deletedEntry), Toast.LENGTH_SHORT).show();
+            db.close();
+            //setContentView(R.layout.activity_main);
+            Intent intent = new Intent(AddItem.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+            progressDialog.dismiss();
+
+        }
+    }
+
 }
+
+
+

@@ -27,5 +27,7 @@
     <string name="wrongPwd">Contraseña Incorrecta</string>
     <string name="emptyMasterPwd">Ingrese una contraseña</string>
     <string name="deletedEntry">Eliminado!</string>
+    <string name="saving">Guardando...</string>
+    <string name="deleting">Borrando...</string>
     
 </resources>

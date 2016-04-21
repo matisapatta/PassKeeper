@@ -40,17 +40,11 @@ public class MainActivity extends AppCompatActivity implements Observer {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent i = getIntent();
-
-        // AddMob
-        AdView mAdView = (AdView) findViewById(R.id.adViewMain);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        //Intent i = getIntent();
 
         // Inicializo Base de datos
         db = new DBManager(this);
         db.addObserver(this);
-
 
         // Inicializo el resto de los componentes
         addBtn=(Button)findViewById(R.id.addBtn);
@@ -59,6 +53,16 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
         //Cargo la list view
         addRow();
+
+
+    }
+    @Override
+    public void onStart(){
+        super.onStart();
+        // AddMob
+        AdView mAdView = (AdView) findViewById(R.id.adViewMain);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         // Evento on click del botón add
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -85,13 +89,9 @@ public class MainActivity extends AppCompatActivity implements Observer {
                 // Busco la estructura
                 DataStruct data = db.getEntrybyID(selected);
                 newActivity(data,editEntry);
-                //finish();
+
             }
         });
-    }
-    @Override
-    public void onStart(){
-        super.onStart();
 
     }
     @Override

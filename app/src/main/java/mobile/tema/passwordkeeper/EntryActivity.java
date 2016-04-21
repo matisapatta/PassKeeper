@@ -1,6 +1,8 @@
 package mobile.tema.passwordkeeper;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,11 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.Random;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
+
 import database.DBManager;
 
 public class EntryActivity extends AppCompatActivity {
@@ -25,25 +24,13 @@ public class EntryActivity extends AppCompatActivity {
     private TextView mainT;
     private DBManager db;
     private String aux;
-    private String k;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_entry);
-
-        // AddMob
-        AdView mAdView = (AdView) findViewById(R.id.adViewEntry);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
-        // key
-        try{
-            k = generateKey().toString();
-        } catch (NoSuchAlgorithmException e){
-
-        }
-
         char[] chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHYJKLMNOPQRSTUVWXYZ!$%&/()?*+".toCharArray();
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
@@ -51,13 +38,18 @@ public class EntryActivity extends AppCompatActivity {
             char c = chars[random.nextInt(chars.length)];
             sb.append(c);
         }
-        String output = sb.toString();
-        System.out.println(output);
+        db = new DBManager(getApplicationContext());
+        // AddMob
+        AdView mAdView = (AdView) findViewById(R.id.adViewEntry);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
-        db = new DBManager(this);
+    }
 
-        //db.update();
-        //db.deleteMasterPwd();
+    @Override
+    public void onStart(){
+        super.onStart();
+
         pwdField = (EditText)findViewById(R.id.pwdField);
         loginBtn = (Button)findViewById(R.id.loginBtn);
         fail = (TextView)findViewById(R.id.fail);
@@ -93,17 +85,40 @@ public class EntryActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+
     }
 
-    public static SecretKey generateKey() throws NoSuchAlgorithmException {
-        // Generate a 256-bit key
-        final int outputKeyLength = 256;
+    private class AsyncLoad extends AsyncTask<Void, Integer, Void>{
 
-        SecureRandom secureRandom = new SecureRandom();
-        // Do *not* seed secureRandom! Automatically seeded from system entropy.
-        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-        keyGenerator.init(outputKeyLength, secureRandom);
-        SecretKey key = keyGenerator.generateKey();
-        return key;
+        @Override
+        protected void onPreExecute()
+        {
+            progressDialog = new ProgressDialog(EntryActivity.this);
+            progressDialog.setProgressStyle(R.style.Widget_AppCompat_Spinner);
+            progressDialog.show();
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... params){
+            synchronized (getApplicationContext()){
+
+                //db.update();
+                //db.deleteMasterPwd();
+
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result)
+        {
+            //close the progress dialog
+            progressDialog.dismiss();
+
+        }
     }
+
 }
