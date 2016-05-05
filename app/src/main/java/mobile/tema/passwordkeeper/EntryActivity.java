@@ -29,6 +29,12 @@ public class EntryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        new AsyncLoad().execute();
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
 
         setContentView(R.layout.activity_entry);
         char[] chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHYJKLMNOPQRSTUVWXYZ!$%&/()?*+".toCharArray();
@@ -39,26 +45,25 @@ public class EntryActivity extends AppCompatActivity {
             sb.append(c);
         }
         db = new DBManager(getApplicationContext());
+        //db.update();
+        //db.deleteMasterPwd();
+
         // AddMob
         AdView mAdView = (AdView) findViewById(R.id.adViewEntry);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-    }
-
-    @Override
-    public void onStart(){
-        super.onStart();
-
         pwdField = (EditText)findViewById(R.id.pwdField);
         loginBtn = (Button)findViewById(R.id.loginBtn);
         fail = (TextView)findViewById(R.id.fail);
         mainT = (TextView)findViewById(R.id.enterPwd);
-        if(db.getMasterPwd(this)==null) {
+
+        if(db.getMasterPwd(getApplicationContext())==null) {
             mainT.setText(getResources().getString(R.string.entryMasterPwd));
         } else {
-            aux = new String(db.getMasterPwd(this));
+            aux = new String(db.getMasterPwd(getApplicationContext()));
         }
+
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,8 +91,6 @@ public class EntryActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     private class AsyncLoad extends AsyncTask<Void, Integer, Void>{
@@ -96,7 +99,8 @@ public class EntryActivity extends AppCompatActivity {
         protected void onPreExecute()
         {
             progressDialog = new ProgressDialog(EntryActivity.this);
-            progressDialog.setProgressStyle(R.style.Widget_AppCompat_Spinner);
+            //progressDialog.setProgressStyle(R.style.Widget_AppCompat_Spinner);
+            progressDialog.setMessage("Cargando!");
             progressDialog.show();
 
         }
@@ -105,8 +109,9 @@ public class EntryActivity extends AppCompatActivity {
         protected Void doInBackground(Void... params){
             synchronized (getApplicationContext()){
 
-                //db.update();
-                //db.deleteMasterPwd();
+
+               // aca va el if
+
 
             }
             return null;
@@ -115,6 +120,7 @@ public class EntryActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result)
         {
+
             //close the progress dialog
             progressDialog.dismiss();
 
