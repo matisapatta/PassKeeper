@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PasswordKeeper</string>
+    <string name="app_name">Password Rack</string>
     <string name="enterPwd">Enter master password:</string>
     <string name="pwd">Password</string>
     <string name="login">Log in</string>

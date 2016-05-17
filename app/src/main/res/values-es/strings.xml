@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PasswordKeeper</string>
+    <string name="app_name">Password Rack</string>
     <string name="enterPwd">Ingrese su contraseña maestra:</string>
     <string name="pwd">Contraseña</string>
     <string name="login">Entrar</string>
