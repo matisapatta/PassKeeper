@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CursorAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class ListDataAdapter extends ArrayAdapter<DataStruct> {
     static class ViewHolder {
         TextView title;
         TextView subtitle;
+        //ImageView image;
     }
 
     private List<DataStruct> dataList;
@@ -39,13 +41,14 @@ public class ListDataAdapter extends ArrayAdapter<DataStruct> {
             holder = new ViewHolder();
             holder.title = (TextView)item.findViewById(R.id.titleLabel);
             holder.subtitle = (TextView)item.findViewById(R.id.subtitleLabel);
+            //holder.image = (ImageView)item.findViewById(R.id.imageList);
             item.setTag(holder);
         } else {
             holder = (ViewHolder)item.getTag();
         }
         holder.title.setText(dataList.get(position).getAccount());
         holder.subtitle.setText(dataList.get(position).getUsername());
-
+        //holder.image.setImageResource(R.drawable.facebook);
         return(item);
     }
 

@@ -16,6 +16,7 @@
         android:id="@+id/listView"
         android:layout_above="@+id/addBtn"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         />
 
@@ -26,7 +27,9 @@
         android:text="@string/add"
         android:layout_above="@+id/resetBtn"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignEnd="@id/listView"
+        android:layout_alignRight="@+id/listView"
         />
     <com.google.android.gms.ads.AdView
         android:id="@+id/adViewMain"
@@ -35,7 +38,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id">
+        ads:adUnitId="@string/adViewMain">
     </com.google.android.gms.ads.AdView>
     <Button
         android:id="@+id/resetBtn"
@@ -43,7 +46,9 @@
         android:layout_height="wrap_content"
         android:text="@string/resetBtn"
         android:layout_alignEnd="@id/listView"
+        android:layout_alignRight="@+id/listView"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_above="@id/adViewMain"
         />
 

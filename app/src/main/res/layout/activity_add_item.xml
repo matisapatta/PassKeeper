@@ -80,6 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/cmtInput"
         android:layout_alignEnd="@+id/cmtInput"
+        android:layout_alignRight="@+id/cmtInput"
         android:text="@string/reset"
         />
     <Button
@@ -96,6 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/cmtInput"
         android:layout_alignEnd="@+id/cmtInput"
+        android:layout_alignRight="@+id/cmtInput"
         android:text="@string/delete"
         android:visibility="invisible"
         />
@@ -106,7 +108,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id">
+        ads:adUnitId="@string/adViewAddItem">
     </com.google.android.gms.ads.AdView>
 
 

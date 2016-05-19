@@ -17,7 +17,10 @@
     <string name="entryMasterPwd">To get started, enter a master password:</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
-    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="adViewMain">ca-app-pub-9708780034715778/5967795849</string>
+    <string name="adViewAddItem">ca-app-pub-9708780034715778/7444529044</string>
+    <string name="adViewEntry">ca-app-pub-9708780034715778/7863331447</string>
+    <string name="banner_ad_unit_id_test">ca-app-pub-3940256099942544/6300978111</string>
     <string name="itemSaved">Saved!</string>
     <string name="screenClear">Restored!</string>
     <string name="emptyAccount">Account cannot be blank!</string>
