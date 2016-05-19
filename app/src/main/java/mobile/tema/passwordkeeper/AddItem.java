@@ -1,13 +1,18 @@
 package mobile.tema.passwordkeeper;
 
+import android.app.ExpandableListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
@@ -29,6 +34,7 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
     private DBManager db;
     private String mode;
     private ProgressDialog progressDialog;
+
 
     @Override
     public void onClick(View v){
@@ -102,7 +108,6 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
         usr = (EditText)findViewById(R.id.usrInput);
         cmt = (EditText)findViewById(R.id.cmtInput);
 
-
         if(mode.equals("EDIT")){
             if(data!=null){
                 acc.setText(data.getAccount());
@@ -126,7 +131,12 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
                 cmt.setEnabled(false);
             }
         } else {
-            data = new DataStruct();
+            if(data!=null){
+                acc.setText(data.getAccount());
+                acc.setEnabled(false);
+            } else {
+                data = new DataStruct();
+            }
             // Visibilidad de los botones
             saveBtn.setVisibility(View.VISIBLE);
             resetBtn.setVisibility(View.VISIBLE);

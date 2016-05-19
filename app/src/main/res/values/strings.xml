@@ -32,5 +32,18 @@
     <string name="deletedEntry">Deleted!</string>
     <string name="saving">Saving...</string>
     <string name="deleting">Deleting...</string>
-    
+    <string name="selectAcc">Select an account category:</string>
+    <string-array name="accOptions">
+        <item>Facebook</item>
+        <item>Gmail</item>
+        <item>Google+</item>
+        <item>Hotmail</item>
+        <item>Instagram</item>
+        <item>Pinterest</item>
+        <item>Skype</item>
+        <item>Twitter</item>
+        <item>WiFi</item>
+        <item>Other..</item>
+    </string-array>
+
 </resources>

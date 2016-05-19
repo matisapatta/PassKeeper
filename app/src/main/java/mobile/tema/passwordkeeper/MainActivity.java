@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
     // Variables
     static final String editEntry = "EDIT";
-    static final String newEntry = "NEW";
     private Button addBtn;
     private Button resetBtn;
     private ListView pwdList;
@@ -69,7 +68,10 @@ public class MainActivity extends AppCompatActivity implements Observer {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                newActivity(null,newEntry);
+                //newActivity(null,newEntry);
+                Intent intent = new Intent(MainActivity.this, AccountSelect.class);
+                startActivity(intent);
+                finish();
             }
         });
 
