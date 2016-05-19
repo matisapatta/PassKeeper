@@ -38,7 +38,9 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
                 data.setUsername(usr.getText().toString());
                 data.setPass(pwd.getText().toString());
                 data.setComment(cmt.getText().toString());
-                new AsyncDB().execute();
+                Validate val = new Validate();
+                if (val.validateData(acc, usr, pwd, cmt, getApplicationContext()))
+                    new AsyncDB().execute();
 
                 break;
             case R.id.resetBtn:
@@ -161,14 +163,14 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
         @Override
         protected Void doInBackground(Void... params){
             synchronized (getApplicationContext()) {
-                Validate val = new Validate();
-                if (val.validateData(acc, usr, pwd, cmt, getApplicationContext())) {
+
+
                     if (mode.equals("NEW")) {
                         db.newEntry(data.getAccount(), data.getUsername(), data.getPassword(), data.getComment());
                     } else {
                         db.updateEntry(data.getId(), data.getAccount(), data.getUsername(), data.getPassword(), data.getComment());
                     }
-                }
+
             }
             return null;
         }
