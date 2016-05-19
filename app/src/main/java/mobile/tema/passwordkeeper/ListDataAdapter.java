@@ -21,7 +21,8 @@ public class ListDataAdapter extends ArrayAdapter<DataStruct> {
     static class ViewHolder {
         TextView title;
         TextView subtitle;
-        //ImageView image;
+        ImageView image;
+
     }
 
     private List<DataStruct> dataList;
@@ -33,6 +34,7 @@ public class ListDataAdapter extends ArrayAdapter<DataStruct> {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         //Inflate XML
+        String type;
         View item = convertView;
         ViewHolder holder;
         if(item==null){
@@ -41,17 +43,54 @@ public class ListDataAdapter extends ArrayAdapter<DataStruct> {
             holder = new ViewHolder();
             holder.title = (TextView)item.findViewById(R.id.titleLabel);
             holder.subtitle = (TextView)item.findViewById(R.id.subtitleLabel);
-            //holder.image = (ImageView)item.findViewById(R.id.imageList);
+            holder.image = (ImageView)item.findViewById(R.id.imageList);
             item.setTag(holder);
         } else {
             holder = (ViewHolder)item.getTag();
         }
         holder.title.setText(dataList.get(position).getAccount());
         holder.subtitle.setText(dataList.get(position).getUsername());
-        //holder.image.setImageResource(R.drawable.facebook);
+        type = dataList.get(position).getAccount().toString();
+        int img = getImageID(type);
+        holder.image.setImageResource(img);
         return(item);
     }
 
-
+    public int getImageID(String type){
+        int img;
+        switch (type){
+            case "Facebook":
+                img = R.drawable.facebook;
+                break;
+            case "Twitter":
+                img = R.drawable.twitter;
+                break;
+            case "Gmail":
+                img = R.drawable.gmail;
+                break;
+            case "Hotmail":
+                img = R.drawable.hotmail;
+                break;
+            case "Instagram":
+                img = R.drawable.instagram;
+                break;
+            case "Google+":
+                img = R.drawable.googleplus;
+                break;
+            case "Pinterest":
+                img = R.drawable.pinterest;
+                break;
+            case "Skype":
+                img = R.drawable.skype;
+                break;
+            case "WiFi":
+                img = R.drawable.wifi;
+                break;
+            default:
+                img = R.drawable.default_img;
+                break;
+        }
+        return img;
+    }
 
 }
