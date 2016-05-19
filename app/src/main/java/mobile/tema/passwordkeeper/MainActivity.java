@@ -15,6 +15,8 @@ import com.google.android.gms.ads.AdView;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -108,6 +110,16 @@ public class MainActivity extends AppCompatActivity implements Observer {
         list = db.getPwdList();
         if(list!=null) {
             adapter = new ListDataAdapter(this, list);
+
+            // Ordena la lista antes de cargarla
+            Comparator<DataStruct> ALPHABETICAL_ORDER1 = new Comparator <DataStruct> () {
+                public int compare(DataStruct object1, DataStruct object2) {
+                    int res = String.CASE_INSENSITIVE_ORDER.compare(object1.getAccount().toString(), object2.getAccount().toString());
+                    return res;
+                }
+            };
+            Collections.sort(list, ALPHABETICAL_ORDER1);
+            // Cargo la lista
             pwdList.setAdapter(adapter);
         }
     }
