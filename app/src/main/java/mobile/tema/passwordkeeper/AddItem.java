@@ -61,7 +61,7 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
 
                 break;
             case R.id.editBtn:
-                acc.setEnabled(true);
+                acc.setEnabled(false);
                 pwd.setEnabled(true);
                 usr.setEnabled(true);
                 cmt.setEnabled(true);
