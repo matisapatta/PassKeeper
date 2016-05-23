@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="mobile.tema.passwordkeeper.AddItem">
+    tools:context="mobile.tema.passwordkeeper.AddItem"
+    >
 
 
     <TextView
@@ -38,6 +39,8 @@
         android:layout_height="wrap_content"
         android:hint="@string/userHint"
         android:layout_below="@+id/usernameTxt"
+        android:shadowColor="@color/colorAccent"
+
         />
     <TextView
         android:id="@+id/pwdTxt"
@@ -74,6 +77,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/cmtInput"
         android:text="@string/save"
+        android:theme="@style/buttonTheme"
         />
     <Button
         android:id="@+id/resetBtn"

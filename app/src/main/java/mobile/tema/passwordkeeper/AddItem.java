@@ -51,7 +51,6 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
                 break;
             case R.id.resetBtn:
                 pwd.setText("");
-                acc.setText("");
                 usr.setText("");
                 cmt.setText("");
                 Toast.makeText(getApplicationContext(),this.getResources().getString(R.string.screenClear),Toast.LENGTH_SHORT).show();
