@@ -44,5 +44,8 @@
         <item>WiFi</item>
         <item>Other..</item>
     </string-array>
+    <string name="yesString">Yes</string>
+    <string name="noString">No</string>
+    <string name="areYouSure">Are you sure?</string>
 
 </resources>

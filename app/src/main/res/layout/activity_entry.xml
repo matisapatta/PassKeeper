@@ -24,6 +24,7 @@
         android:layout_below="@+id/enterPwd"
         android:inputType="textPassword"
         android:hint="@string/pwd"
+        android:singleLine="true"
         />
     <Button
         android:layout_width="match_parent"

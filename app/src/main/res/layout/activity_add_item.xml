@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/accHint"
         android:layout_below="@+id/accTxt"
+        android:singleLine="true"
         />
 
     <TextView
@@ -39,8 +40,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/userHint"
         android:layout_below="@+id/usernameTxt"
-        android:shadowColor="@color/colorAccent"
-
+        android:singleLine="true"
         />
     <TextView
         android:id="@+id/pwdTxt"
@@ -55,6 +55,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/pwd"
         android:layout_below="@id/pwdTxt"
+        android:singleLine="true"
         />
     <TextView
         android:id="@+id/cmtTxt"
@@ -70,6 +71,7 @@
         android:hint="@string/cmtHint"
         android:inputType="text"
         android:layout_below="@id/cmtTxt"
+        android:singleLine="true"
         />
     <Button
         android:id="@+id/saveBtn"

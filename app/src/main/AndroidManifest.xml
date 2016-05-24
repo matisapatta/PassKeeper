@@ -27,7 +27,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".AddItem"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".AccountSelect"></activity>
     </application>
 

@@ -1,6 +1,8 @@
 package mobile.tema.passwordkeeper;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,21 +10,13 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
 
 import database.DBManager;
 
@@ -57,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
         addRow();
 
 
+
     }
     @Override
     public void onStart(){
@@ -81,8 +76,23 @@ public class MainActivity extends AppCompatActivity implements Observer {
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.deleteAll();
-                Toast.makeText(getApplicationContext(), getResources().getString(R.string.deletedEntry), Toast.LENGTH_SHORT).show();
+
+                //Put up the Yes/No message box
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder
+                        .setTitle(R.string.resetBtn)
+                        .setMessage(R.string.areYouSure)
+                        .setIcon(android.R.drawable.ic_menu_delete)
+                        .setPositiveButton(R.string.yesString, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                //Yes button clicked, do something
+                                db.deleteAll();
+                                Toast.makeText(getApplicationContext(), getResources().getString(R.string.deletedEntry),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton(R.string.noString, null)						//Do nothing on no
+                        .show();
             }
         });
 
@@ -97,6 +107,8 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
             }
         });
+
+
 
     }
     @Override
