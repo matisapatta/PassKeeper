@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.GridLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -27,6 +29,10 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
     private Button resetBtn;
     private Button editBtn;
     private Button deleteBtn;
+    private Button genPassBtn;
+    private Button copyUser;
+    private Button copyPwd;
+    private Button copyCmt;
     private EditText pwd;
     private EditText acc;
     private EditText usr;
@@ -57,16 +63,27 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
                 break;
             case R.id.deleteBtn:
                 new AsyncDelete().execute();
-
-
                 break;
             case R.id.editBtn:
                 acc.setEnabled(false);
                 pwd.setEnabled(true);
                 usr.setEnabled(true);
                 cmt.setEnabled(true);
+                genPassBtn.setVisibility(View.VISIBLE);
                 editBtn.setVisibility(View.INVISIBLE);
                 saveBtn.setVisibility(View.VISIBLE);
+                copyCmt.setClickable(false);
+                copyPwd.setVisibility(View.INVISIBLE);
+                copyUser.setClickable(false);
+                //toLeft(pwd,R.id.genPassBtn);
+                //toLeft(usr, R.id.copyUser);
+                break;
+            case R.id.genPassBtn:
+                val = new Validate();
+                pwd.setText(val.randomPwd());
+                Toast.makeText(getApplicationContext(),getResources().getString(R.string.generated),Toast.LENGTH_SHORT).show();
+                break;
+
             default:
                 break;
         }
@@ -102,6 +119,10 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
         resetBtn = (Button)findViewById(R.id.resetBtn);
         editBtn = (Button)findViewById(R.id.editBtn);
         deleteBtn = (Button)findViewById(R.id.deleteBtn);
+        genPassBtn = (Button)findViewById(R.id.genPassBtn);
+        copyUser = (Button)findViewById(R.id.copyUser);
+        copyPwd = (Button)findViewById(R.id.copyPwd);
+        copyCmt = (Button)findViewById(R.id.copyCmt);
         pwd = (EditText)findViewById(R.id.pwdInput);
         acc = (EditText)findViewById(R.id.accInput);
         usr = (EditText)findViewById(R.id.usrInput);
@@ -122,12 +143,16 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
                 resetBtn.setVisibility(View.INVISIBLE);
                 deleteBtn.setVisibility(View.VISIBLE);
                 editBtn.setVisibility(View.VISIBLE);
+                genPassBtn.setVisibility(View.INVISIBLE);
 
                 //Cambio editabilidad de los campos
                 acc.setEnabled(false);
                 pwd.setEnabled(false);
                 usr.setEnabled(false);
                 cmt.setEnabled(false);
+                copyCmt.setClickable(true);
+                copyPwd.setClickable(true);
+                copyUser.setClickable(true);
             }
         } else {
             if(data!=null){
@@ -141,6 +166,12 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
             resetBtn.setVisibility(View.VISIBLE);
             editBtn.setVisibility(View.INVISIBLE);
             deleteBtn.setVisibility(View.INVISIBLE);
+            genPassBtn.setVisibility(View.VISIBLE);
+            copyCmt.setClickable(false);
+            copyPwd.setVisibility(View.INVISIBLE);
+            copyUser.setClickable(false);
+            //toLeft(pwd,R.id.genPassBtn);
+            //toLeft(usr, R.id.copyUser);
         }
 
         // Asigno los eventos onClick
@@ -148,6 +179,7 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
         resetBtn.setOnClickListener(this);
         deleteBtn.setOnClickListener(this);
         editBtn.setOnClickListener(this);
+        genPassBtn.setOnClickListener(this);
 
     }
     @Override
@@ -198,6 +230,14 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
             progressDialog.dismiss();
 
         }
+    }
+
+    private void toLeft(EditText vText, int vBtn){
+        android.widget.RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)vText.getLayoutParams();
+        params.addRule(RelativeLayout.LEFT_OF, vBtn);
+        params.addRule(RelativeLayout.START_OF, vBtn);
+        vText.setLayoutParams(params);
+
     }
 
     private class AsyncDelete extends AsyncTask<Void, Integer, Void>{

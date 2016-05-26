@@ -47,4 +47,5 @@
     <string name="yesString">Si</string>
     <string name="noString">No</string>
     <string name="areYouSure">¿Estás seguro?</string>
+    <string name="generated">Password generada!</string>
 </resources>

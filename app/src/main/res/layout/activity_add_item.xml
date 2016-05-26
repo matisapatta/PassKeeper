@@ -41,7 +41,8 @@
         android:hint="@string/userHint"
         android:layout_below="@+id/usernameTxt"
         android:singleLine="true"
-        />
+        android:layout_alignRight="@+id/pwdInput"
+        android:layout_alignEnd="@+id/pwdInput" />
     <TextView
         android:id="@+id/pwdTxt"
         android:layout_width="match_parent"
@@ -56,7 +57,9 @@
         android:hint="@string/pwd"
         android:layout_below="@id/pwdTxt"
         android:singleLine="true"
-        />
+
+        android:layout_toLeftOf="@+id/genPassBtn"
+        android:layout_toStartOf="@+id/genPassBtn" />
     <TextView
         android:id="@+id/cmtTxt"
         android:layout_width="match_parent"
@@ -72,7 +75,8 @@
         android:inputType="text"
         android:layout_below="@id/cmtTxt"
         android:singleLine="true"
-        />
+        android:layout_alignRight="@+id/pwdInput"
+        android:layout_alignEnd="@+id/pwdInput" />
     <Button
         android:id="@+id/saveBtn"
         android:layout_width="150dp"
@@ -118,6 +122,40 @@
         ads:adUnitId="@string/banner_ad_unit_id_test">
     </com.google.android.gms.ads.AdView>
 
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="..."
+        android:id="@+id/genPassBtn"
+        android:layout_below="@+id/pwdTxt"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:drawableLeft="@android:drawable/ic_menu_save"
+        android:id="@+id/copyUser"
+        android:layout_below="@+id/usernameTxt"
+        android:layout_alignRight="@+id/usernameTxt"
+        android:layout_alignEnd="@+id/usernameTxt" />
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:drawableLeft="@android:drawable/ic_menu_save"
+        android:id="@+id/copyPwd"
+        android:layout_below="@+id/pwdTxt"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:drawableLeft="@android:drawable/ic_menu_save"
+        android:id="@+id/copyCmt"
+        android:layout_above="@+id/resetBtn"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 
     //TODO CAMBIAR ADD
