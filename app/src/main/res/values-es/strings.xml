@@ -48,4 +48,5 @@
     <string name="noString">No</string>
     <string name="areYouSure">¿Estás seguro?</string>
     <string name="generated">Password generada!</string>
+    <string name="copiedClipboard">Copiado al Portapapeles!</string>
 </resources>

@@ -2,6 +2,8 @@ package mobile.tema.passwordkeeper;
 
 import android.app.ExpandableListActivity;
 import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -83,7 +85,15 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
                 pwd.setText(val.randomPwd());
                 Toast.makeText(getApplicationContext(),getResources().getString(R.string.generated),Toast.LENGTH_SHORT).show();
                 break;
-
+            case R.id.copyUser:
+                copyClipboard(usr);
+                break;
+            case R.id.copyPwd:
+                copyClipboard(pwd);
+                break;
+            case R.id.copyCmt:
+                copyClipboard(cmt);
+                break;
             default:
                 break;
         }
@@ -180,6 +190,9 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
         deleteBtn.setOnClickListener(this);
         editBtn.setOnClickListener(this);
         genPassBtn.setOnClickListener(this);
+        copyUser.setOnClickListener(this);
+        copyPwd.setOnClickListener(this);
+        copyCmt.setOnClickListener(this);
 
     }
     @Override
@@ -232,12 +245,11 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
         }
     }
 
-    private void toLeft(EditText vText, int vBtn){
-        android.widget.RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)vText.getLayoutParams();
-        params.addRule(RelativeLayout.LEFT_OF, vBtn);
-        params.addRule(RelativeLayout.START_OF, vBtn);
-        vText.setLayoutParams(params);
-
+    private void copyClipboard(EditText source){
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("", source.getText().toString() );
+        clipboard.setPrimaryClip(clip);
+        Toast.makeText(getApplicationContext(),getResources().getString(R.string.copiedClipboard),Toast.LENGTH_SHORT).show();
     }
 
     private class AsyncDelete extends AsyncTask<Void, Integer, Void>{
