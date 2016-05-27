@@ -146,6 +146,11 @@ public class MainActivity extends AppCompatActivity implements Observer {
         startActivity(intent);
         this.finish();
     }
+    @Override
+    protected void onPause(){
+        super.onPause();
+        finish();
+    }
 
 
 }
