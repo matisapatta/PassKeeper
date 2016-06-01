@@ -119,9 +119,9 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
         super.onStart();
 
         // AddMob
-        AdView mAdView = (AdView) findViewById(R.id.adViewItem);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        //AdView mAdView = (AdView) findViewById(R.id.adViewItem);
+        //AdRequest adRequest = new AdRequest.Builder().build();
+        //mAdView.loadAd(adRequest);
 
 
         // Relaciono los botones del layout con el código Java

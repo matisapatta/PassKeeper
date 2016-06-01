@@ -9,7 +9,6 @@
         <item name="android:buttonStyle">@style/buttonTheme</item>
         <item name="buttonStyle">@style/buttonTheme</item>
         <item name="colorButtonNormal">@color/colorPrimary</item>
-        <item name="android:colorBackground">@color/colorPrimary</item>
 
     </style>
 

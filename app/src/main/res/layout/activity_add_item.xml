@@ -125,7 +125,7 @@
     <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:text="..."
+        android:drawableLeft="@android:drawable/ic_menu_add"
         android:id="@+id/genPassBtn"
         android:layout_below="@+id/pwdTxt"
         android:layout_alignParentRight="true"
@@ -134,7 +134,7 @@
     <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:drawableLeft="@android:drawable/ic_menu_save"
+        android:drawableLeft="@android:drawable/ic_input_get"
         android:id="@+id/copyUser"
         android:layout_below="@+id/usernameTxt"
         android:layout_alignRight="@+id/usernameTxt"
@@ -142,7 +142,7 @@
     <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:drawableLeft="@android:drawable/ic_menu_save"
+        android:drawableLeft="@android:drawable/ic_input_get"
         android:id="@+id/copyPwd"
         android:layout_below="@+id/pwdTxt"
         android:layout_alignParentRight="true"
@@ -151,7 +151,7 @@
     <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:drawableLeft="@android:drawable/ic_menu_save"
+        android:drawableLeft="@android:drawable/ic_input_get"
         android:id="@+id/copyCmt"
         android:layout_above="@+id/resetBtn"
         android:layout_alignParentRight="true"

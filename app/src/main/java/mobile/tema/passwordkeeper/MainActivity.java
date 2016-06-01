@@ -57,9 +57,9 @@ public class MainActivity extends AppCompatActivity implements Observer {
     public void onStart(){
         super.onStart();
         // AddMob
-        AdView mAdView = (AdView) findViewById(R.id.adViewMain);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        //AdView mAdView = (AdView) findViewById(R.id.adViewMain);
+        //AdRequest adRequest = new AdRequest.Builder().build();
+        //mAdView.loadAd(adRequest);
 
         // Evento on click del botón add
         addBtn.setOnClickListener(new View.OnClickListener() {
