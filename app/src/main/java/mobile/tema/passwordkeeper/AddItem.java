@@ -48,6 +48,7 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
     public void onClick(View v){
         switch(v.getId()){
             case R.id.saveBtn:
+                // convierte toodo a string y guarda el objeto en la BBDD (en background)
                 data.setAccount(acc.getText().toString());
                 data.setUsername(usr.getText().toString());
                 data.setPass(pwd.getText().toString());
@@ -58,12 +59,14 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
 
                 break;
             case R.id.resetBtn:
+                // Blankea los campos
                 pwd.setText("");
                 usr.setText("");
                 cmt.setText("");
                 Toast.makeText(getApplicationContext(),this.getResources().getString(R.string.screenClear),Toast.LENGTH_SHORT).show();
                 break;
             case R.id.deleteBtn:
+                // Elimina el registro de la BBDD
                 new AsyncDelete().execute();
                 break;
             case R.id.editBtn:
@@ -77,10 +80,9 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
                 copyCmt.setClickable(false);
                 copyPwd.setVisibility(View.INVISIBLE);
                 copyUser.setClickable(false);
-                //toLeft(pwd,R.id.genPassBtn);
-                //toLeft(usr, R.id.copyUser);
                 break;
             case R.id.genPassBtn:
+                // genera una pwd random
                 val = new Validate();
                 pwd.setText(val.randomPwd());
                 Toast.makeText(getApplicationContext(),getResources().getString(R.string.generated),Toast.LENGTH_SHORT).show();
@@ -103,7 +105,7 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
-        // Tomo el intent
+        // Tomo el intent. Esto es necesario porque la misma activity se crea como "nueva" o "edit".
         Intent i = getIntent();
         Bundle b = i.getExtras();
         mode = b.getString("MODE");
@@ -119,9 +121,9 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener{
         super.onStart();
 
         // AddMob
-        //AdView mAdView = (AdView) findViewById(R.id.adViewItem);
-        //AdRequest adRequest = new AdRequest.Builder().build();
-        //mAdView.loadAd(adRequest);
+        AdView mAdView = (AdView) findViewById(R.id.adViewItem);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
 
         // Relaciono los botones del layout con el código Java

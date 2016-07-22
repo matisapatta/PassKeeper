@@ -12,8 +12,9 @@ import net.sqlcipher.database.SQLiteDatabase;
 import net.sqlcipher.database.SQLiteOpenHelper;
 
 /**
- * Created by mati on 4/8/16.
  * Esto es para definir la clase DataBase, que es el tipo de base de datos que vamos a usar
+ * Crea y upgradea la BBDD
+ *
  */
 public class DataBase extends SQLiteOpenHelper{
 

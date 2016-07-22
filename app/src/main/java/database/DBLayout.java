@@ -3,9 +3,9 @@ package database;
 import android.provider.BaseColumns;
 
 /**
- * Created by mati on 4/8/16.
- * Se define el layout de la BBDD
+    Se define el layout de la BBDD
  */
+
 public class DBLayout {
     public DBLayout() {
     }

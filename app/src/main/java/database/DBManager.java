@@ -21,7 +21,7 @@ import mobile.tema.passwordkeeper.Validate;
 
 
 /**
- * Created by mati on 4/8/16.
+ * El DBManager es la clase que opera sobre la BBDD
  */
 public class DBManager extends Observable{
     private DataBase b;

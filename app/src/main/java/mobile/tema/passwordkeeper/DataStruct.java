@@ -6,7 +6,7 @@ import android.os.Parcelable;
 
 
 /**
- * Created by mati on 4/7/16.
+ * La estructura de datos que necesito
  */
 public class DataStruct implements Parcelable {
 

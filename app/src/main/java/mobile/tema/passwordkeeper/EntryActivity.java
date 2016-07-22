@@ -49,9 +49,9 @@ public class EntryActivity extends AppCompatActivity {
         //db.deleteMasterPwd();
 
         // AddMob
-        //AdView mAdView = (AdView) findViewById(R.id.adViewEntry);
-        //AdRequest adRequest = new AdRequest.Builder().build();
-        //mAdView.loadAd(adRequest);
+        AdView mAdView = (AdView) findViewById(R.id.adViewEntry);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         pwdField = (EditText)findViewById(R.id.pwdField);
         loginBtn = (Button)findViewById(R.id.loginBtn);
